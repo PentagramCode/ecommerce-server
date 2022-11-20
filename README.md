@@ -58,7 +58,7 @@ yarn lint
 
 Create .development.env or .production.env file to define environment variables
 
-| Variable  | Description            | Default  |
-| --------- | ---------------------- | -------- |
-| PORT      | Port to run the server | 3000     |
-| MONGO_URI | Database type          | postgres |
+| Variable  | Description            | Default                    |
+| --------- | ---------------------- | --------                   |
+| PORT      | Port to run the server | 3000                       |
+| MONGO_URI | Database type          | mongodb://mongo/ecommerces |
