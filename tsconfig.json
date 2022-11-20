@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "rootDir": "./src",
+    "baseUrl": ".",
+    "paths": {
+      "@config/*": [
+        "./src/config/*"
+      ],
+      "@interfaces/*": [
+        "./src/interfaces/*"
+      ],
+      "@routes/*": [
+        "./src/routes/*"
+      ],
+      "@servers/*": [
+        "./src/servers/*"
+      ],
+    },
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "allowJs": true
+  },
+  "include": [
+    "src",
+    "__test__"
+  ],
+  "exclude": [
+    "node_modules",
+    "./coverage",
+    "__test__",
+    "jest.config.js"
+  ]
+}

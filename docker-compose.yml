@@ -1,0 +1,20 @@
+
+version: "3.9"
+
+services:
+  api:
+    container_name: ecommerce-server
+    restart: always
+    build: .
+    ports:
+      - "3000:3000"
+    links:
+      - "mongo"
+    volumes:
+      - .:/usr/src/app
+    
+  mongo:
+    container_name: mongoDB
+    image: mongo
+    ports:
+      - "27017:27017"
