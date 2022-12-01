@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN yarn install --save --legacy-peer-deps --ignore-engines
+RUN yarn install --save --silent --legacy-peer-deps --ignore-engines
 
 COPY . .
 
