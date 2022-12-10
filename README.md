@@ -54,6 +54,11 @@ yarn test
 yarn lint
 ```
 
+# Commits or branches
+
+- Create branches with ``{feature/fix/refactor}/{name-branch}``
+- Create commits with ``[ADD/FIX/REFACTOR/DELETE] descriptive comment``
+
 ## Environment variables
 
 Create .development.env or .production.env file to define environment variables
