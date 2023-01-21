@@ -1,11 +1,11 @@
-import { Request, Response, Router } from 'express';
+// Libraries
+import { Router } from 'express';
+
+// Controllers
+import { ping } from '@controllers/start.controller';
 
 const router = Router();
 
-router.get('/ping', (req: Request, res: Response) => {
-	res.status(200).json({
-		message: 'pong',
-	});
-});
+router.get('/ping', ping);
 
 export default router;

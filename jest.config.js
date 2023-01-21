@@ -7,9 +7,14 @@ module.exports = {
   },
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
   moduleNameMapper: {
-    '^@servers/(.*)$': '<rootDir>/src/servers/$1',
-    '^@routes/(.*)$': '<rootDir>/src/routes/$1',
-    '^@interfaces/(.*)$': '<rootDir>/src/interfaces/$1',
     '^@config/(.*)$': '<rootDir>/src/config/$1',
+    '^@constants/(.*)$': '<rootDir>/src/constants/$1',
+    '^@controllers/(.*)$': '<rootDir>/src/controllers/$1',
+    '^@helpers/(.*)$': '<rootDir>/src/helpers/$1',
+    '^@interfaces/(.*)$': '<rootDir>/src/interfaces/$1',
+    '^@models/(.*)$': '<rootDir>/src/models/$1',
+    '^@routes/(.*)$': '<rootDir>/src/routes/$1',
+    '^@servers/(.*)$': '<rootDir>/src/servers/$1',
+    '^@validations/(.*)$': '<rootDir>/src/validations/$1',
   },
 }

@@ -4,11 +4,7 @@ import dotenv from 'dotenv';
 import Server from '@servers/server';
 
 dotenv.config({
-	path: `${
-		process.env.NODE_ENV === 'production'
-			? '.production.env'
-			: '.development.env'
-	}`,
+	path: `${process.env.NODE_ENV === 'production' ? '.production.env' : '.development.env'}`,
 });
 
 const server = new Server();
