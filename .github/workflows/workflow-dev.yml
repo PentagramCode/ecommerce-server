@@ -54,8 +54,8 @@ jobs:
     needs: [lint, build]
     runs-on: ubuntu-20.04
     steps:
-      - name: Start MongoDB v${{ matrix.mongodb-version }}
-        uses: supercharge/mongodb-github-action@1.2.0
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.8.0
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
       - uses: actions/checkout@v2
