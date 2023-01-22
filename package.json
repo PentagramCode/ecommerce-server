@@ -9,7 +9,7 @@
 		"start": "NODE_ENV=production ts-node -r tsconfig-paths/register  dist/index.js",
 		"watch-ts": "tsc -w",
 		"lint": "eslint .",
-		"test": "jest --detectOpenHandles --watch"
+		"test": "jest --detectOpenHandles"
 	},
 	"author": "leonhardtjs",
 	"license": "MIT",
