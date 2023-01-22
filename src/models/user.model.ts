@@ -7,7 +7,6 @@ import { IUser } from '@interfaces/User';
 
 // Constants
 import { ROLES } from '@constants/roles';
-import { NextFunction } from 'express';
 
 const UserSchema = new Schema<IUser>(
 	{
@@ -39,7 +38,7 @@ UserSchema.methods.toJSON = function (): IUser {
  */
 UserSchema.pre('save', async function (next) {
 	try {
-		const user = this;
+		const user = this.toObject();
 		const salt = bcryptjs.genSaltSync(10);
 		user.password = bcryptjs.hashSync(user.password, salt);
 		next();
