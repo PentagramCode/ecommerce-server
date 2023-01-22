@@ -1,18 +1,18 @@
 name: Deployment Development
 
-on: 
-  push: 
-    branches: [ develop ]
+on:
+  push:
+    branches: [develop]
   pull_request:
-    branches: [ develop ]
+    branches: [develop]
     types: [opened, synchronize]
 
 jobs:
-  avoid_reduncy: 
+  avoid_reduncy:
     runs-on: ubuntu-20.04
     steps:
       - name: Cancel Previus Redundant Builds
-        uses: styfle/cancel-workflow-action@0.9.1 
+        uses: styfle/cancel-workflow-action@0.9.1
         with:
           access_token: ${{ github.token }}
 
@@ -31,7 +31,7 @@ jobs:
       - name: Lint
         run: yarn lint
 
-  build: 
+  build:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -54,6 +54,10 @@ jobs:
     needs: [lint, build]
     runs-on: ubuntu-20.04
     steps:
+      - name: Start MongoDB v${{ matrix.mongodb-version }}
+        uses: supercharge/mongodb-github-action@1.2.0
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
@@ -68,5 +72,3 @@ jobs:
           path: dist
       - name: Test
         run: yarn test
-      
-

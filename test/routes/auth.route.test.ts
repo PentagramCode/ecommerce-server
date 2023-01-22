@@ -20,7 +20,7 @@ const server = new Server();
 
 describe('Auth Route Tests', () => {
 	beforeAll(async () => {
-		await mongoose.connect(process.env.MONGO_URI || '');
+		await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/ecommerce');
 	});
 
 	afterAll(async () => {
