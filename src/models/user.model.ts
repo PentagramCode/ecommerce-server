@@ -38,7 +38,7 @@ UserSchema.methods.toJSON = function (): IUser {
  */
 UserSchema.pre('save', async function (next) {
 	try {
-		const user = this.toObject();
+		const user = this;
 		const salt = bcryptjs.genSaltSync(10);
 		user.password = bcryptjs.hashSync(user.password, salt);
 		next();
