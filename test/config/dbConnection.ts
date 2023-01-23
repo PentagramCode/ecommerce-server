@@ -8,7 +8,8 @@ export const dbConnectionTest = async (): Promise<void> => {
 	await mongoose.connect(mongoUri);
 };
 
-export const dbDisconnectTest = async (): Promise<void> => {
+export const dbDisconnectTest = async () => {
 	const mongo = await MongoMemoryServer.create();
+	await mongoose.disconnect();
 	await mongo.stop();
 };
