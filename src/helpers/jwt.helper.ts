@@ -7,10 +7,10 @@ import jwt from 'jsonwebtoken';
  */
 const generateJWT = async (id: string): Promise<string> => {
 	try {
-		const secretKey = process.env.SECRET_PRIVATE_KEY ?? '';
+		const secretKey = process.env.SECRET_PRIVATE_KEY ?? 'testsecret';
 		const payload = { id };
-
 		const token = jwt.sign(payload, secretKey, { expiresIn: '24h' });
+
 		return token;
 	} catch (error) {
 		console.log(error);

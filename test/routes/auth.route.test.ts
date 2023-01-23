@@ -12,19 +12,18 @@ import UserModel from '../../src/models/user.model';
 // Utils
 import { badLogin, badRegister, loginUser, registerUser } from '../utils/auth';
 
-dotenv.config({
-	path: `${process.env.NODE_ENV === 'production' ? '.production.env' : '.development.env'}`,
-});
+// Config
+import { dbConnectionTest, dbDisconnectTest } from '../config/dbConnection';
 
 const server = new Server();
 
 describe('Auth Route Tests', () => {
 	beforeAll(async () => {
-		await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/ecommerce');
+		await dbConnectionTest();
 	});
 
 	afterAll(async () => {
-		await mongoose.disconnect();
+		await dbDisconnectTest();
 	});
 
 	describe('POST /api/auth/register', () => {
