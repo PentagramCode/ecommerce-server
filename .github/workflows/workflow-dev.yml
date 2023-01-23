@@ -60,10 +60,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 18
-      - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@1.8.0
-        with:
-          mongodb-version: ${{ matrix.mongodb-version }}
       - name: Install dependencies
         run: yarn install
       - uses: actions/download-artifact@v2
