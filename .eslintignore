@@ -1,4 +1,5 @@
 dist
 node_modules
 jest.config.js
-__test__
+test
+coverage
