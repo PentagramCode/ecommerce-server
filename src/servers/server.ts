@@ -6,12 +6,14 @@ import cors from 'cors';
 import dbConnection from '@config/dbConnection';
 
 // Routes
-import StartRoute from '@routes/start.route';
 import AuthRoute from '@routes/auth.route';
 
 class Server {
 	public app: Application;
 	private readonly port: string;
+
+	// Routes
+	private readonly authRoute = new AuthRoute();
 
 	constructor() {
 		this.port = process.env.PORT ?? '';
@@ -31,8 +33,7 @@ class Server {
 	}
 
 	routes() {
-		this.app.use('/api/start/', StartRoute);
-		this.app.use('/api/auth/', AuthRoute);
+		this.authRoute.routes(this.app);
 	}
 
 	listen() {

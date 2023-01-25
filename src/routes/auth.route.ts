@@ -1,15 +1,18 @@
-// Libraries
-import { Router } from 'express';
-
-// Controllers
-import { login, register } from '@controllers/auth.controller';
-
-// Validations
+import AuthController from '@controllers/auth.controller';
 import { loginUser, registerUser } from '@validations/auth.validation';
+import { Application } from 'express';
 
-const router = Router();
+class AuthRoute {
+	private readonly authController: AuthController;
 
-router.post('/register', registerUser, register);
-router.post('/login', loginUser, login);
+	constructor() {
+		this.authController = new AuthController();
+	}
 
-export default router;
+	public routes(app: Application) {
+		app.route('/api/auth/register').post(registerUser, this.authController.registerController);
+		app.route('/api/auth/login').post(loginUser, this.authController.loginController);
+	}
+}
+
+export default AuthRoute;

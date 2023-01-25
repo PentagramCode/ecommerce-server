@@ -1,46 +1,22 @@
-// Libraries
+import AuthService from '@services/auth.service';
 import { Request, Response } from 'express';
-import bcryptjs from 'bcryptjs';
 
-// Models
-import UserModel from '@models/user.model';
+class AuthController {
+	private readonly authService: AuthService;
 
-// Helpers
-import generateJWT from '@helpers/jwt.helper';
-
-export const register = async (req: Request, res: Response) => {
-	try {
-		const { username, email, password } = req.body;
-		const newUser = new UserModel({ username, email, password });
-
-		await newUser.save();
-
-		return res.status(201).send({ status: 201, data: newUser });
-	} catch (error) {
-		return res.status(500).send({ status: 500, error });
+	constructor() {
+		this.authService = new AuthService();
 	}
-};
 
-export const login = async (req: Request, res: Response) => {
-	try {
-		const { email, password } = req.body;
-		const user = await UserModel.findOne({ email, status: true });
+	public registerController = async (req: Request, res: Response) => {
+		const { status, data } = await this.authService.registerService(req.body);
+		return res.status(status).send(data);
+	};
 
-		// Validate if the email exist
-		if (!user) {
-			return res.status(401).send({ data: { msg: 'Invalid credentials' } });
-		}
+	public loginController = async (req: Request, res: Response) => {
+		const { status, data } = await this.authService.loginService(req.body);
+		return res.status(status).send(data);
+	};
+}
 
-		// Validate password
-		const validPassword = bcryptjs.compareSync(password, user.password);
-		if (!validPassword) {
-			return res.status(401).send({ data: { msg: 'Invalid credentials' } });
-		}
-
-		// Generate JWT
-		const token = await generateJWT(user.id);
-		return res.status(200).send({ data: { user, token } });
-	} catch (error) {
-		return res.status(500).send({ status: 500, error });
-	}
-};
+export default AuthController;

@@ -13,6 +13,7 @@
 			"@models/*": ["./src/models/*"],
 			"@routes/*": ["./src/routes/*"],
 			"@servers/*": ["./src/servers/*"],
+			"@services/*": ["./src/services/*"],
 			"@validations/*": ["./src/validations/*"]
 		},
 		"outDir": "./dist",

@@ -23,3 +23,37 @@ export interface IUser {
 	status: boolean;
 	google: boolean;
 }
+
+/**
+ * This interface describe the user test props
+ * @param { string } username - user's username
+ * @param { string } email - user's email
+ * @param { string } password - user's password
+ */
+export interface IUserTest {
+	username: string;
+	email: string;
+	password: string;
+}
+
+/**
+ * This interface describe the register props
+ * @param { string } username - user's username
+ * @param { string } email - user's email
+ * @param { string } password - user's password
+ */
+export interface IRegisterUser {
+	username: string;
+	email: string;
+	password: string;
+}
+
+/**
+ * This interface describe the login props
+ * @param { string } email - user's email
+ * @param { string } password - user's password
+ */
+export interface ILoginUser {
+	email: string;
+	password: string;
+}
