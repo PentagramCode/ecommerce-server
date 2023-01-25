@@ -1,6 +1,11 @@
-import AuthController from '@controllers/auth.controller';
-import { loginUser, registerUser } from '@validations/auth.validation';
+// Libraries
 import { Application } from 'express';
+
+// Controllers
+import AuthController from '@controllers/auth.controller';
+
+// Validations
+import { loginUser, registerUser } from '@validations/auth.validation';
 
 class AuthRoute {
 	private readonly authController: AuthController;
