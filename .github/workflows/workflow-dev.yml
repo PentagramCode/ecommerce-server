@@ -7,28 +7,27 @@ on:
     branches: [develop]
     types: [opened, synchronize]
 
-env:
-  AWS_REGION: us-west-2
-  DOCKER_REGISTRY: <your-ecr-uri>.dkr.ecr.<AWS_REGION>.amazonaws.com
-  DOCKER_IMAGE: myimage
-
 jobs:
-  avoid_reduncy:
-    runs-on: ubuntu-20.04
+  hello_world:
+    runs-on: ubuntu-18.04
     steps:
-      - name: Cancel Previus Redundant Builds
-        uses: styfle/cancel-workflow-action@0.9.1
-        with:
-          access_token: ${{ github.token }}
-  
+      - name: Echo the message
+        run: echo "Hello World!"
+  # avoid_reduncy:
+  #   runs-on: ubuntu-20.04
+  #   steps:
+  #     - name: Cancel Previus Redundant Builds
+  #       uses: styfle/cancel-workflow-action@0.9.1
+  #       with:
+  #         access_token: ${{ github.token }}
 
-  print secrets: 
-    runs-on: ubuntu-20.04
-    - name: Docker secrets
-      run: echo ${{ secrets.DOCKER_REGISTRY }}
-      run: echo ${{ secrets.DOCKER_IMAGE }}
-    - name: AWS secrets
-      run: echo ${{ secrets.AWS_REGION }} 
+  # print secrets:
+  #   runs-on: ubuntu-20.04
+  #   - name: Docker secrets
+  #     run: echo ${{ secrets.DOCKER_REGISTRY }}
+  #     run: echo ${{ secrets.DOCKER_IMAGE }}
+  #   - name: AWS secrets
+  #     run: echo ${{ secrets.AWS_REGION }}
 
   # lint:
   #   runs-on: ubuntu-20.04
