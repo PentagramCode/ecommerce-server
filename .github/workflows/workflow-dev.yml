@@ -22,8 +22,8 @@ jobs:
           access_token: ${{ github.token }}
 
   print secrets:
-    - name: Docker secrets
-      run: echo Hello World
+    - name: Install dependencies
+      run: echo 'Hola'
 
   # lint:
   #   runs-on: ubuntu-20.04
