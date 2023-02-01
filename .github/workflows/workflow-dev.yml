@@ -7,6 +7,11 @@ on:
     branches: [develop]
     types: [opened, synchronize]
 
+env:
+  AWS_REGION: us-west-2
+  DOCKER_REGISTRY: <your-ecr-uri>.dkr.ecr.<AWS_REGION>.amazonaws.com
+  DOCKER_IMAGE: myimage
+
 jobs:
   avoid_reduncy:
     runs-on: ubuntu-20.04
@@ -15,56 +20,68 @@ jobs:
         uses: styfle/cancel-workflow-action@0.9.1
         with:
           access_token: ${{ github.token }}
+  
 
-  lint:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - name: Install dependencies
-        run: yarn install
-      - name: Lint
-        run: yarn lint
+  print secrets: 
+    - name: Docker secrets
+      run: echo ${{ secrets.DOCKER_REGISTRY }}
+      run: echo ${{ secrets.DOCKER_IMAGE }}
+    - name: AWS secrets
+      run: echo ${{ secrets.AWS_REGION }} 
 
-  build:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - name: Install dependencies
-        run: yarn install
-      - name: Build
-        run: yarn build
-      - uses: actions/upload-artifact@v2
-        with:
-          name: dist
-          path: dist
+  # lint:
+  #   runs-on: ubuntu-20.04
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 18
+  #     - name: Install dependencies
+  #       run: yarn install
+  #     - name: Lint
+  #       run: yarn lint
 
-  test:
-    needs: [lint, build]
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 18
-      - name: Install dependencies
-        run: yarn install
-      - uses: actions/download-artifact@v2
-        with:
-          name: dist
-          path: dist
-      - name: Test
-        run: yarn test
+  # test:
+  #   needs: [lint]
+  #   runs-on: ubuntu-20.04
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         fetch-depth: 0
+  #     - uses: actions/setup-node@v2
+  #       with:
+  #         node-version: 18
+  #     - name: Test
+  #       run: yarn test
+
+  # build:
+  #   needs: [test]
+  #   runs-on: ubuntu-20.04
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 18
+  #     - name: Install dependencies
+  #       run: yarn install
+  #     - name: Build
+  #       run: yarn build
+
+  # docker:
+  #    needs: [build]
+  #   runs-on: ubuntu-20.04
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         fetch-depth: 0
+  #     - uses: actions/setup-node@v2
+  #       with:
+  #         node-version: 18
+  #     - name: Build Docker image
+  #       run: docker-compose up -d
