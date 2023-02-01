@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: Docker secrets
-        run: echo ${{ secrets.DOCKER_REGISTRY }}
-        run: echo ${{ secrets.DOCKER_IMAGE }}
-      - name: AWS secrets
-        run: echo ${{ secrets.AWS_REGION }}
+        run: echo "${{ secrets.DOCKER_REGISTRY }}"
+      #   run: echo ${{ secrets.DOCKER_IMAGE }}
+      # - name: AWS secrets
+      #   run: echo ${{ secrets.AWS_REGION }}
   # avoid_reduncy:
   #   runs-on: ubuntu-20.04
   #   steps:
