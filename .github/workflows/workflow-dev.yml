@@ -20,10 +20,15 @@ jobs:
         uses: styfle/cancel-workflow-action@0.9.1
         with:
           access_token: ${{ github.token }}
+  
 
-  print secrets:
-    - name: Install dependencies
-      run: echo 'Hola'
+  print secrets: 
+    runs-on: ubuntu-20.04
+    - name: Docker secrets
+      run: echo ${{ secrets.DOCKER_REGISTRY }}
+      run: echo ${{ secrets.DOCKER_IMAGE }}
+    - name: AWS secrets
+      run: echo ${{ secrets.AWS_REGION }} 
 
   # lint:
   #   runs-on: ubuntu-20.04
