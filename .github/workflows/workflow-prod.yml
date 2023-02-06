@@ -1,18 +1,18 @@
 name: Deployment Production
 
-on: 
-  push: 
-    branches: [ main ]
+on:
+  push:
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
     types: [opened, synchronize]
-      
+
 jobs:
-  avoid_reduncy: 
+  avoid_reduncy:
     runs-on: ubuntu-20.04
     steps:
       - name: Cancel Previous Redundant Builds
-        uses: styfle/cancel-workflow-action@0.9.1 
+        uses: styfle/cancel-workflow-action@0.9.1
         with:
           access_token: ${{ github.token }}
 
@@ -31,7 +31,7 @@ jobs:
       - name: Lint
         run: yarn lint
 
-  build: 
+  build:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
