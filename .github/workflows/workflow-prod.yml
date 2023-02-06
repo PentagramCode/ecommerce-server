@@ -1,18 +1,18 @@
 name: Deployment Production
 
-on: 
-  push: 
-    branches: [ main ]
+on:
+  push:
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
     types: [opened, synchronize]
-      
+
 jobs:
-  avoid_reduncy: 
+  avoid_reduncy:
     runs-on: ubuntu-20.04
     steps:
       - name: Cancel Previous Redundant Builds
-        uses: styfle/cancel-workflow-action@0.9.1 
+        uses: styfle/cancel-workflow-action@0.9.1
         with:
           access_token: ${{ github.token }}
 
@@ -31,7 +31,22 @@ jobs:
       - name: Lint
         run: yarn lint
 
-  build: 
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: yarn install
+      - name: Test
+        run: yarn test
+
+  build:
+    needs: [lint, test]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -45,26 +60,3 @@ jobs:
         run: yarn install
       - name: Build
         run: yarn build
-      - uses: actions/upload-artifact@v2
-        with:
-          name: dist
-          path: dist
-
-  test:
-    needs: [lint, build]
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 18
-      - name: Install dependencies
-        run: yarn install
-      - uses: actions/download-artifact@v2
-        with:
-          name: dist
-          path: dist
-      - name: Test
-        run: yarn test
