@@ -61,6 +61,7 @@ jobs:
 
   deploy:
     needs: [test]
+    if: ${{ github.event_name == 'push'}}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -72,8 +73,7 @@ jobs:
       - name: Install railway
         run: npm install @railway/cli -g
       - name: Deploy to Railway
-        if: ${{ github.event_name == 'push'}}
-        run: railway up --service ${{ secrets.RAILWAY_APP_PROD_NAME }}
+        run: railway up
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
           RAILWAY_DOCKERFILE_PATH: Dockerfile

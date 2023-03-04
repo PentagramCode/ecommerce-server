@@ -70,9 +70,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Install Railway
-        run: npm i -g @railway/cli
-      - name: Deploy to railway
+      - name: Install railway
+        run: npm install @railway/cli -g
+      - name: Deploy to Railway
         run: railway up
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          RAILWAY_DOCKERFILE_PATH: Dockerfile
