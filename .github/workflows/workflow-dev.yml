@@ -76,3 +76,4 @@ jobs:
         run: railway up --service ${{ secrets.RAILWAY_APP_DEV_NAME }}
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          RAILWAY_DOCKERFILE_PATH: Dockerfile
