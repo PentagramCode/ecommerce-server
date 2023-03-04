@@ -73,7 +73,7 @@ jobs:
         run: npm install @railway/cli -g
       - name: Deploy to Railway
         if: ${{ github.event_name == 'push'}}
-        run: railway up -- --service ecommerce-server-dev
+        run: railway up
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
           RAILWAY_DOCKERFILE_PATH: Dockerfile.dev
