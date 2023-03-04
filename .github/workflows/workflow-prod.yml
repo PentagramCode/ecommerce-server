@@ -73,9 +73,8 @@ jobs:
     needs: [test]
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v2
-      - name: Login to Railway
-        uses: railwayapp/github-action@v0.3.1
+      - uses: bervProject/railway-deploy@main
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
         with:
-          railway: ${{ secrets.RAILWAY_TOKEN }}
+          service: 'ecommerce-server'
