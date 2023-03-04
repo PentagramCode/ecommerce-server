@@ -70,6 +70,6 @@ jobs:
         run: npm install @railway/cli -g
       - name: Deploy to Railway
         if: ${{ github.event_name == 'push'}}
-        run: railway up ${{ secrets.RAILWAY_APP_PROD_NAME }}
+        run: railway up --service ${{ secrets.RAILWAY_APP_PROD_NAME }}
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
