@@ -67,7 +67,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Install railway
-        run: npm i -g @railway
+        run: npm install @railway/cli -g
       - name: Deploy to Railway
         if: ${{ github.event_name == 'push'}}
         run: railway up
