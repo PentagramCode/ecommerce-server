@@ -71,9 +71,11 @@ jobs:
 
   deployment:
     needs: [test]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: bervProject/railway-deploy@main
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Login to Railway
+        uses: railwayapp/github-action@v0.3.1
         with:
-          railway_token: ${{ secrets.RAILWAY_TOKEN }}
-          service: 'my-service'
+          railway: ${{ secrets.RAILWAY_TOKEN }}
