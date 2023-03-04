@@ -8,14 +8,6 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  avoid_reduncy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cancel previous redundant Builds
-        uses: styfle/cancel-workflow-action@0.9.1
-        with:
-          access-token: ${{ github.token }}
-
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -47,3 +39,37 @@ jobs:
         with:
           name: dist
           path: dist
+
+  test:
+    needs: [lint, build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: yarn install
+      - uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: dist
+      - name: Test
+        run: yarn test
+
+  deploy:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install railway
+        run: npm i -g @railway
+      - name: Deploy to Railway
+        if: ${{ github.event_name == 'push'}}
+        run: railway up
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
