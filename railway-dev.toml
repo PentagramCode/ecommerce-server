@@ -1,2 +1,2 @@
 working_dir = "."
-dockerfile = "Dockerfile"
+dockerfile = "Dockerfile.dev"
