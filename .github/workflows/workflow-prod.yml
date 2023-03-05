@@ -73,6 +73,6 @@ jobs:
       - name: Install railway
         run: npm install @railway/cli -g
       - name: Deploy to Railway
-        run: railway up --service ${{ secrets.RAILWAY_APP_PROD_NAME }}
+        run: railway link material-hospital
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
