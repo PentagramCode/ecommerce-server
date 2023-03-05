@@ -73,7 +73,6 @@ jobs:
       - name: Install railway
         run: npm install @railway/cli -g
       - name: Deploy to Railway
-        run: railway up
+        run: railway up --service ${{ secrets.RAILWAY_APP_PROD_NAME }}
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-          RAILWAY_DOCKERFILE_PATH: Dockerfile
