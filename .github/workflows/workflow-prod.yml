@@ -73,7 +73,7 @@ jobs:
       - name: Install railway
         run: npm install @railway/cli -g
       - name: Login to railway
-        run: railway Login --browserless
+        run: railway run
       - name: Select project
         run: railway link material-hospital
         env:
