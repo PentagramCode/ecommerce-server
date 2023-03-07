@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: styfle/cancel-workflow-action@0.9.1
         with:
-          access_token: ${{ secrets.token}}
+          access_token: ${{ github.token }}
 
   lint:
     runs-on: ubuntu-latest
