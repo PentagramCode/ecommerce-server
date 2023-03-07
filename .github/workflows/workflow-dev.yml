@@ -58,22 +58,3 @@ jobs:
           path: dist
       - name: Test
         run: yarn test
-
-  deploy:
-    needs: [test]
-    if: ${{ github.event_name == 'push'}}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - name: Install railway
-        run: npm install @railway/cli -g
-      - name: Deploy to Railway
-        run: railway up
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-          RAILWAY_DOCKERFILE_PATH: Dockerfile
