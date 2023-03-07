@@ -58,19 +58,3 @@ jobs:
           path: dist
       - name: Test
         run: yarn test
-
-  deploy:
-    needs: [test]
-    if: ${{ github.event_name == 'push'}}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - uses: bervProject/railway-deploy@main
-        with:
-          railway_token: ${{ secrets.RAILWAY_TOKEN }}
-          service: 'ecomerce-server'
