@@ -1,4 +1,4 @@
-# Simple setup Express with Typescript
+# Ecommerce Server
 
 This is a repository intended to serve as a starting point if you want to bootstrap a express API project in TypeScript.
 
